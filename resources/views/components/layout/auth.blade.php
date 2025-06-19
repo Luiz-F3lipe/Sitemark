@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ config('app.locale') }}">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,7 +15,15 @@
     {{-- Configurando tailwind --}}
     @vite(['resources/css/app.css'])
 </head>
-<body class="font-onest">
-    <h1 class="text-2xl font-bold text-accent-orange">Teste</h1>
+
+<body class="font-onest bg-background-primary p-5 flex">
+    <div class="flex w-full h-[calc(100vh-40px)]">
+        <img src="{{ asset('thumbnail.png') }}" class="bg-accent-orange rounded-lg w-1/2" />
+        <div class="w-1/2 flex flex-col items-center px-20 my-10">
+            <img src="{{ asset('logo.png') }}" />
+            {{ $slot }}
+        </div>
+    </div>
 </body>
+
 </html>
