@@ -18,6 +18,19 @@
         body {
             height: 100vh;
         }
+
+        .scrollbar::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .scrollbar::-webkit-scrollbar-track {
+            /* background-color: var(--color-content-tertiary, #2a2a2a); */
+        }
+
+        .scrollbar::-webkit-scrollbar-thumb {
+            background-color: var(--color-content-tertiary, #2a2a2a);
+            border-radius: 4px;
+        }
     </style>
 </head>
 
