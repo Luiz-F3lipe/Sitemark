@@ -18,7 +18,7 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::get('/logout', LogoutController::class)->name('logout');
-    Route::get('/dashboard', fn() => 'dashboard')->middleware('auth')->name('dashboard');
+    Route::post('/logout', LogoutController::class)->name('logout');
+    Route::get('/dashboard', fn() => view('dashboard'))->name('dashboard');
 });
 
