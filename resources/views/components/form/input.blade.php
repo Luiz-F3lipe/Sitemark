@@ -9,12 +9,11 @@
     name="{{ $name }}"
     id="{{ $name }}"
     class="w-full p-2 rounded-lg border {{ $errors->has($name) ? 'border-accent-red' : 'border-border-primary' }} bg-background-secondary text-content-secondary font-medium focus:outline-none focus:ring-2 focus:ring-accent-orange"
-    {{ $attributes }}
-  />
+    {{ $attributes }} />
 
   @error($name)
-  <p class="text-red-500 text-sm mt-1">
-    {{ $message }}
-  </p>
+    <p class="text-red-500 text-sm mt-1 flex items-center gap-2">
+      <x-icons.close class="text-red-500" /> {{ $message }}
+    </p>
   @enderror
 </div>
