@@ -20,7 +20,7 @@
     <div class="flex w-full h-[calc(100vh-40px)]">
         <img src="{{ asset('thumbnail.png') }}" class="bg-accent-orange rounded-lg w-1/2" />
         <div class="w-1/2 flex flex-col items-center px-20 my-10">
-            <img src="{{ asset('logo.png') }}" />
+            <x-icons.logo />
             {{ $slot }}
         </div>
     </div>
