@@ -35,6 +35,7 @@
 </head>
 
 <body class="font-onest bg-background-primary text-white min-h-screen flex flex-col items-center p-5">
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 
     <!-- Logo no topo -->
     <header class="w-full flex justify-center mb-4">
@@ -48,6 +49,7 @@
 
     <!-- Bottom Sheet fixo -->
     <x-footbar />
+
 </body>
 
 </html>
