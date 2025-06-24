@@ -1,12 +1,14 @@
+@props(['link'])
+
 <div class="w-[600px] h-20 bg-background-secondary flex items-center px-5 gap-4 rounded-3xl flex-shrink-0">
     <div class="w-14 h-14 bg-accent-purple"></div>
     <div class="flex flex-col">
         <h2 class="text-lg font-bold text-content-primary">
-            Supernatural <span class="text-sm bg-accent-purple w-10 h-2 px-1 rounded-lg text-content-inverse">HBO
-                MAX</span>
+            {{ $link->title }}
+            <x-badge :text="$link->streaming" />
         </h2>
         <a class="text-sm text-content-secondary italic cursor-pointer hover:underline">
-            https://max.com.br/series/supernatural
+            {{ $link->url }}
         </a>
     </div>
     <div class="flex items-center gap-2 ml-auto">

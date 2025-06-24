@@ -1,5 +1,5 @@
 <x-layout.app>
-    <div x-data="{ modalOpen: false }" class="flex flex-col">
+    <div x-data="{ modalOpen: {{ $errors->any() ? 'true' : 'false' }} }" class="flex flex-col">
         <!-- Cabeçalho -->
         <div class="flex justify-between w-full items-center">
             <h1 class="text-2xl font-bold text-white my-10">
@@ -16,7 +16,9 @@
         <!-- Conteúdo dos cards -->
         <div
             class="flex flex-col w-full justify-center items-center gap-4 max-h-[500px] overflow-y-auto scrollbar pt-16">
-            <x-card />
+            @foreach($links as $link)
+                <x-card :link="$link" />
+            @endforeach
         </div>
 
         <!-- Modal que depende de modalOpen -->

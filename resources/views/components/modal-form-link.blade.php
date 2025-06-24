@@ -1,47 +1,44 @@
-<div x-show="modalOpen" x-cloak 
-    class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-30 backdrop-blur-md">
-    <div class="bg-[#0F0B08] text-white rounded-2xl p-8 w-full max-w-3xl shadow-lg" @click.outside="modalOpen = false">
+<div x-show="modalOpen" x-cloak
+     class="fixed inset-0 z-50 flex items-center justify-center bg-background-primary bg-opacity-30 backdrop-blur-md">
+    <div class="bg-background-primary text-white rounded-2xl p-8 w-full max-w-3xl shadow-lg"
+         @click.outside="modalOpen = false">
 
-        <h2 class="text-xl font-bold mb-6 border-b border-orange-500 pb-2">Adicionar link</h2>
+        <h2 class="text-xl font-bold mb-6 pb-2">
+            <span class="border-b-2 border-accent-orange">Cre</span>ate link
+        </h2>
 
-        <form class="space-y-6">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                    <label class="block mb-1">Título do link</label>
-                    <input type="text" placeholder="Digite o nome do conteúdo"
-                        class="bg-[#1A1A1A] w-full px-4 py-2 rounded-xl placeholder-gray-400 text-white focus:outline-none" />
-                </div>
-
-                <div>
-                    <label class="block mb-1">Plataforma de streaming</label>
-                    <input type="text" placeholder="Onde você está assistindo?"
-                        class="bg-[#1A1A1A] w-full px-4 py-2 rounded-xl placeholder-gray-400 text-white focus:outline-none" />
-                </div>
-            </div>
-
-            <div>
-                <label class="block mb-1">URL</label>
-                <input type="text" placeholder="Cole a URL do conteúdo"
-                    class="bg-[#1A1A1A] w-full px-4 py-2 rounded-xl placeholder-gray-400 text-white focus:outline-none" />
-            </div>
-
-            <div class="flex items-center justify-between gap-6">
-                <div class="flex flex-col items-center">
-                    <div
-                        class="bg-orange-500 text-center text-black font-bold rounded-xl w-[100px] h-[100px] flex items-center justify-center">
-                        100×100 px
+        <form class="space-y-6" action="{{ route('link.store') }}" method="POST">
+            @csrf
+            <div class="flex gap-6">
+                <div class="flex flex-col flex-1 space-y-4">
+                    <div class="flex gap-4">
+                        <x-form.input name="title" label="Title" placeholder="Enter the title here" class="w-full" value="{{ old('title') }}"/>
+                        <x-form.input name="streaming" label="Streaming" placeholder="Enter the streaming here"
+                                      class="w-full" value="{{ old('streaming') }}"/>
                     </div>
-                    <span class="text-sm mt-2">⬆️ Adicionar imagem</span>
+                    <div>
+                        <x-form.input name="url" label="URL" placeholder="Enter the URL here" class="w-full" value="{{ old('url') }}"/>
+                    </div>
+                </div>
+                <div class="flex flex-col items-center justify-center ml-6">
+                    <label class="bg-accent-orange font-bold text-center text-background-primary rounded-xl w-[100px] h-[100px] flex items-center justify-center cursor-pointer hover:bg-orange-600 transition">
+                            <input type="file" name="image" class="hidden" accept="image/*">
+                            100×100px
+                        </label>
+                        <span class="text-md font-medium mt-2">
+                            <x-icons.upload class="inline-block w-5 h-5 mr-1" />
+                            add image
+                        </span>
                 </div>
             </div>
 
             <div class="flex justify-end gap-4 pt-4">
                 <button type="button" @click="modalOpen = false"
-                    class="bg-[#1A1A1A] hover:bg-[#333] text-white px-5 py-2 rounded-full transition">
-                    Voltar
+                        class="bg-[#1A1A1A] hover:bg-[#333] text-white px-5 py-2 rounded-full transition">
+                    Cancelar
                 </button>
                 <button type="submit"
-                    class="bg-orange-500 hover:bg-orange-600 text-black font-bold px-6 py-2 rounded-full transition">
+                        class="bg-accent-orange hover:bg-orange-600 text-background-primary font-bold px-6 py-2 rounded-full transition">
                     Salvar
                 </button>
             </div>
