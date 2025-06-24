@@ -12,7 +12,11 @@
         </a>
     </div>
     <div class="flex items-center gap-2 ml-auto">
-        <x-icons.edit class="text-content-primary cursor-pointer hover:text-accent-orange" />
-        <x-icons.trash class="text-content-primary cursor-pointer hover:text-accent-orange" />
+        <a href="{{ route('link.edit', $link->id)}}" class="outline-none focus:outline-none">
+            <x-icons.edit class="text-content-primary cursor-pointer hover:text-accent-orange" />
+        </a>
+        <a class="outline-none focus:outline-none">
+            <x-icons.trash class="text-content-primary cursor-pointer hover:text-accent-orange" />
+        </a>
     </div>
 </div>

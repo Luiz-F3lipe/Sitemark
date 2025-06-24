@@ -1,5 +1,5 @@
 <x-layout.app>
-    <div x-data="{ modalOpen: {{ $errors->any() ? 'true' : 'false' }} }" class="flex flex-col">
+    <div x-data="{ modalOpen: {{ $errors->any() || isset($linkEditando) ? 'true' : 'false' }}}" class="flex flex-col">
         <!-- Cabeçalho -->
         <div class="flex justify-between w-full items-center">
             <h1 class="text-2xl font-bold text-white my-10">
@@ -22,6 +22,6 @@
         </div>
 
         <!-- Modal que depende de modalOpen -->
-        <x-modal-form-link />
+        <x-modal-form-link :link="$linkEditando ?? null" />
     </div>
 </x-layout.app>

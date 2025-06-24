@@ -31,15 +31,22 @@ class LinkController extends Controller
      */
     public function edit(Link $link)
     {
-        //
+        $links = Link::all();
+        return view('dashboard', [
+            'links' => $links,
+            'linkEditando' => $link,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateLinkRequest $request, Link $link)
+    public function update(UpdateLinkRequest $request, $id)
     {
-        //
+        $link = auth()->user()->links()->findOrfail($id);
+        $link->update($request->validated());
+
+        return to_route('dashboard');
     }
 
     /**
