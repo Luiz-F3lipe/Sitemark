@@ -4,12 +4,10 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
 use \App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ProfileController;
 use \App\Http\Controllers\LinkController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Route::middleware('guest')->group(function () {
     Route::get('/login', [LoginController::class, 'index'])->name('login');
@@ -20,8 +18,15 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
+    Route::get('/', function () {
+        return view('dashboard');
+    });
     Route::post('/logout', LogoutController::class)->name('logout');
     Route::get('/dashboard', DashboardController::class)->name('dashboard');
+
+    Route::get('/profile', ProfileController::class)->name('profile');
+    Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
+
     Route::post('/link', [LinkController::class, 'store'])->name('link.store');
 
     Route::middleware('can:protectedLink,link')->group(function() {

@@ -1,8 +1,8 @@
 <footer class="bg-background-secondary border-border-primary rounded-full py-2 px-4 flex gap-6">
-    <x-button-foot active="{{ request()->routeIs('dashboard') ? 'true' : 'false' }}" >
+    <x-button-foot active="{{ request()->routeIs('dashboard') ? 'true' : 'false' }}" onclick="window.location.href='{{ route('dashboard') }}'">
       <x-icons.list class="w-8 h-6" />
     </x-button-foot>
-    <x-button-foot active="{{ request()->routeIs('profile') ? 'true' : 'false' }}">
+    <x-button-foot active="{{ request()->routeIs('profile') ? 'true' : 'false' }}" onclick="window.location.href='{{ route('profile') }}'">
         <x-icons.user class="w-8 h-6" />
     </x-button-foot>
     <x-button-foot onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

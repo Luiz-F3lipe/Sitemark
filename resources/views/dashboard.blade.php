@@ -27,6 +27,8 @@
                                 <x-icons.up class="text-content-primary cursor-pointer hover:text-accent-orange"/>
                             </button>
                         </form>
+                    @else
+                        <div class="w-8 h-8"></div>
                     @endunless
 
                     @unless($loop->last)
@@ -38,6 +40,8 @@
                                 <x-icons.down class="text-content-primary cursor-pointer hover:text-accent-orange"/>
                             </button>
                         </form>
+                    @else
+                        <div class="w-8 h-8"></div>
                     @endunless
 
                     <x-card :link="$link"/>
