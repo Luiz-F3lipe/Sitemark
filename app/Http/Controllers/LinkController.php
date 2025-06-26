@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreLinkRequest;
 use App\Http\Requests\UpdateLinkRequest;
 use App\Models\Link;
+use App\Models\User;
 
 class LinkController extends Controller
 {
@@ -21,7 +22,22 @@ class LinkController extends Controller
      */
     public function store(StoreLinkRequest $request)
     {
-        auth()->user()->links()->create($request->validated());
+        $data = $request->validated();
+
+        if ($file = $request->photo) {
+            $data['photo'] = $file->store('photos');
+        }
+
+        /** @var User $user */
+        $user = auth()->user();
+
+        $lastLinkSort = $user->links()->max('sort');
+
+        if (!is_null($lastLinkSort)) {
+            $data['sort'] = $lastLinkSort + 1;
+        }
+
+        $user->links()->create($data);
 
         return to_route('dashboard');
     }
@@ -31,6 +47,7 @@ class LinkController extends Controller
      */
     public function edit(Link $link)
     {
+
         $links = Link::all();
         return view('dashboard', [
             'links' => $links,
@@ -41,10 +58,18 @@ class LinkController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateLinkRequest $request, $id)
+    public function update(UpdateLinkRequest $request, Link $link)
     {
-        $link = auth()->user()->links()->findOrfail($id);
-        $link->update($request->validated());
+        $data = $request->validated();
+
+        if ($file = $request->photo) {
+            if ($link->photo) {
+                \Storage::delete($link->photo);
+            }
+            $data['photo'] = $file->store('photos');
+        }
+
+        $link->update($data);
 
         return to_route('dashboard');
     }
@@ -54,6 +79,25 @@ class LinkController extends Controller
      */
     public function destroy(Link $link)
     {
-        //
+        // deletar a imagem do storage
+        if ($link->photo) {
+            \Storage::delete($link->photo);
+        }
+        $link->delete();
+
+        return back();
+    }
+
+    public function up(Link $link)
+    {
+        $link->moveUp();
+        return back();
+    }
+
+    public function down(Link $link)
+    {
+        $link->moveDown();
+
+        return back();
     }
 }

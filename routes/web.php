@@ -22,9 +22,14 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::post('/logout', LogoutController::class)->name('logout');
     Route::get('/dashboard', DashboardController::class)->name('dashboard');
-
     Route::post('/link', [LinkController::class, 'store'])->name('link.store');
-    Route::get('/link/{link}/edit', [LinkController::class, 'edit'])->name('link.edit');
-    Route::put('/link/{id}', [LinkController::class, 'update'])->name('link.update');
+
+    Route::middleware('can:protectedLink,link')->group(function() {
+        Route::get('/link/{link}/edit', [LinkController::class, 'edit'])->name('link.edit');
+        Route::put('/link/{link}', [LinkController::class, 'update'])->name('link.update');
+        Route::delete('/link/{link}', [LinkController::class, 'destroy'])->name('link.destroy');
+        Route::patch('/link/{link}/up', [LinkController::class, 'up'])->name('link.up');
+        Route::patch('/link/{link}/down', [LinkController::class, 'down'])->name('link.down');
+    });
 });
 

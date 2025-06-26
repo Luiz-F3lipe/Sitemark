@@ -11,8 +11,9 @@
 
         <form
             class="space-y-6"
-            action="{{ $link ? route('link.update', $link->id)  : route('link.store') }}"
+            action="{{ $link ? route('link.update', $link)  : route('link.store') }}"
             method="POST"
+            enctype="multipart/form-data"
         >
             @csrf
             @if($link)
@@ -21,21 +22,29 @@
             <div class="flex gap-6">
                 <div class="flex flex-col flex-1 space-y-4">
                     <div class="flex gap-4">
-                        <x-form.input name="title" label="Title" placeholder="Enter the title here" class="w-full" value="{{ old('title', $link?->title) }}"/>
+                        <x-form.input name="title" label="Title" placeholder="Enter the title here" class="w-full"
+                                      value="{{ old('title', $link?->title) }}"/>
                         <x-form.input name="streaming" label="Streaming" placeholder="Enter the streaming here"
                                       class="w-full" value="{{ old('streaming', $link?->streaming) }}"/>
                     </div>
                     <div>
-                        <x-form.input name="url" label="URL" placeholder="Enter the URL here" class="w-full" value="{{ old('url', $link?->url) }}"/>
+                        <x-form.input name="url" label="URL" placeholder="Enter the URL here" class="w-full"
+                                      value="{{ old('url', $link?->url) }}"/>
                     </div>
                 </div>
                 <div class="flex flex-col items-center justify-center ml-6">
-                    <label class="bg-accent-orange font-bold text-center text-background-primary rounded-xl w-[100px] h-[100px] flex items-center justify-center cursor-pointer hover:bg-orange-600 transition">
-                            <input type="file" name="image" class="hidden" accept="image/*">
-                            100×100px
-                        </label>
-                        <span class="text-md font-medium mt-2">
-                            <x-icons.upload class="inline-block w-5 h-5 mr-1" />
+                    <label
+                        class="bg-accent-orange font-bold text-center text-background-primary rounded-xl w-[100px] h-[100px] flex items-center justify-center cursor-pointer hover:bg-orange-600 transition">
+                        <input type="file" name="photo" class="hidden" accept="image/*">
+                        @if($link?->photo)
+                            <img src="{{ asset('storage/' . $link->photo) }}" alt="Link Picture"
+                                 class="w-full h-full object-cover rounded-lg"/>
+                        @else
+                            100x100px
+                        @endif
+                    </label>
+                    <span class="text-md font-medium mt-2">
+                            <x-icons.upload class="inline-block w-5 h-5 mr-1"/>
                             add image
                         </span>
                 </div>

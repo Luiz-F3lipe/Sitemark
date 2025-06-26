@@ -3,7 +3,11 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\UploadedFile;
 
+/**
+ * @property-read UploadedFile $photo
+ */
 class UpdateLinkRequest extends FormRequest
 {
     /**
@@ -25,6 +29,7 @@ class UpdateLinkRequest extends FormRequest
             'title' => ['required', 'string',],
             'streaming' => ['required', 'string', 'min:3', 'max:15'],
             'url' => ['required', 'url'],
+            'photo' => ['nullable', 'image'],
         ];
     }
 }
